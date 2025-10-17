@@ -2,9 +2,10 @@ from flask import Flask
 import psycopg2
 import os
 from dotenv import load_dotenv
+from flask_cors import  CORS
 load_dotenv()
-
 app = Flask(__name__)
+CORS(app)
 conn = psycopg2.connect(
     host=os.getenv("PGHOST"),
     user=os.getenv("PGUSER"),
@@ -20,4 +21,4 @@ def hello():
     return "de connection failed"
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
