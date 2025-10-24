@@ -83,6 +83,17 @@ def index():
 def thank_you():
     return render_template('thank_you.html')
 
+@app.route('/feedback')
+def view_feedback():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, name, message, is_read FROM feedback ORDER BY id DESC")
+    feedbacks = cursor.fetchall()
+    return render_template('feedback.html', feedbacks=feedbacks)
+
+
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 

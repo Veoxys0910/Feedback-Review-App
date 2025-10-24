@@ -21,6 +21,16 @@ def client():
             conn.commit()
         yield client
 
+def test_view_feedback(client):
+    """Test that /feedback page displays stored feedback."""
+    with app.app_context():
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO feedback (name, message, is_read) VALUES (?, ?, 0)", ("Test User", "Test Message"))
+        conn.commit()
+
+        response = client.get('/feedback')
+        assert response.status_code == 200
 
 def test_homepage(client):
     """Test that homepage loads correctly."""
