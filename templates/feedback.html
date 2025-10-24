@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Feedback List</h2>
+<table border="1">
+    <tr><th>ID</th><th>Name</th><th>Message</th><th>Read</th><th>Actions</th></tr>
+    {% for fb in feedbacks %}
+    <tr>
+        <td>{{ fb[0] }}</td>
+        <td>{{ fb[1] }}</td>
+        <td>{{ fb[2] }}</td>
+        <td>{{ 'Yes' if fb[3] else 'No' }}</td>
+        <td>
+            {% if not fb.read %}
+            <a href="/feedback/read/{{ fb[0] }}">Mark as Read</a>
+            {% endif %}
+            <a href="/feedback/delete/{{ fb[0] }}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
