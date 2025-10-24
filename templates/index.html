@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Submit Feedback</h2>
+<form method="post" action="/">
+    <input name="name" placeholder="Enter your name"><br>
+    <textarea name="message" placeholder="Enter your feedback" required></textarea><br>
+    <label><input type="checkbox" name="anonymous"> Submit anonymously</label><br>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
